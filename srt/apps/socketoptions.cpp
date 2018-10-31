@@ -16,6 +16,7 @@ using namespace std;
 extern const set<string> true_names = { "1", "yes", "on", "true" };
 extern const set<string> false_names = { "0", "no", "off", "false" };
 
+/*支持传输直播和文件*/
 extern const std::map<std::string, int> enummap_transtype = {
     { "live", SRTT_LIVE },
     { "file", SRTT_FILE }
@@ -44,7 +45,7 @@ SocketOption::Mode SrtConfigurePre(SRTSOCKET socket, string host, map<string, st
     {
         modestr = options["mode"];
     }
-
+/*还真可以标记啊*/
     if ( modestr == "client" || modestr == "caller" )
     {
         mode = SocketOption::CALLER;

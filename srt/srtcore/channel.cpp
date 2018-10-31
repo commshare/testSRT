@@ -94,7 +94,7 @@ using namespace std;
 
 
 extern logging::Logger mglog;
-
+/*传说中的通道啊*/
 CChannel::CChannel():
 m_iIPversion(AF_INET),
 m_iSockAddrSize(sizeof(sockaddr_in)),
@@ -117,7 +117,7 @@ m_iIpToS(-1),
 #endif
 m_iSndBufSize(65536),
 m_iRcvBufSize(65536),
-m_BindAddr(version)
+m_BindAddr(version) /*绑定的地址可以是v6的哦*/
 {
    m_iSockAddrSize = (AF_INET == m_iIPversion) ? sizeof(sockaddr_in) : sizeof(sockaddr_in6);
 }
@@ -159,11 +159,13 @@ void CChannel::open(const sockaddr* addr)
       hints.ai_family = m_iIPversion;
       hints.ai_socktype = SOCK_DGRAM;
 
+      /*这里端口填写0*/
       if (0 != ::getaddrinfo(NULL, "0", &hints, &res))
          throw CUDTException(MJ_SETUP, MN_NORES, NET_ERROR);
 
       if (0 != ::bind(m_iSocket, res->ai_addr, res->ai_addrlen))
          throw CUDTException(MJ_SETUP, MN_NORES, NET_ERROR);
+      /*通过res来获取到地址和长度*/
       memcpy(&m_BindAddr, res->ai_addr, res->ai_addrlen);
       m_BindAddr.len = res->ai_addrlen;
 
@@ -183,6 +185,7 @@ void CChannel::attach(UDPSOCKET udpsock)
 
 void CChannel::setUDPSockOpt()
 {
+  /*看起来是这样识别ios osx 各类设备的*/
    #if defined(BSD) || defined(OSX) || (TARGET_OS_IOS == 1) || (TARGET_OS_TV == 1)
       // BSD system will fail setsockopt if the requested buffer size exceeds system maximum value
       int maxsize = 64000;
@@ -200,7 +203,7 @@ void CChannel::setUDPSockOpt()
 #ifdef SRT_ENABLE_IPOPTS
       if (-1 != m_iIpTTL)
       {
-         if(m_iIPversion == AF_INET)
+         if(m_iIPversion == AF_INET)  /*V4和V6在ttl的设置上还是有区别的*/
          {
             if(0 != ::setsockopt(m_iSocket, IPPROTO_IP, IP_TTL, (const char*)&m_iIpTTL, sizeof(m_iIpTTL)))
                throw CUDTException(MJ_SETUP, MN_NORES, NET_ERROR);

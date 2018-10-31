@@ -540,7 +540,7 @@ typedef struct SRT_MsgCtrl_
 {
    int flags;            // Left for future
    int msgttl;           // TTL for a message, default -1 (delivered always)
-   int inorder;          // Whether a message is allowed to supersede partially lost one. Unused in stream and live mode.
+   int inorder;          // Whether a message is allowed to supersede 取代 partially lost one. Unused in stream and live mode.
    int boundary;         //0:mid pkt, 1(01b):end of frame, 2(11b):complete frame, 3(10b): start of frame
    uint64_t srctime;     // source timestamp (usec), 0: use internal time     
    int32_t pktseq;       // sequence number of the first packet in received message (unused for sending)
@@ -600,12 +600,12 @@ SRT_API extern void srt_clearlasterror(void);
 // performance track
 // srt_perfmon is deprecated - use srt_bistats, which provides the same stats plus more.
 SRT_API extern int srt_perfmon(SRTSOCKET u, SRT_TRACEINFO * perf, int clear) SRT_ATR_DEPRECATED;
-// perfmon with Byte counters for better bitrate estimation.
+// perfmon with Byte counters for better bitrate estimation. 统计字节数目，用于比特率估计
 SRT_API extern int srt_bstats(SRTSOCKET u, SRT_TRACEBSTATS * perf, int clear);
 // permon with Byte counters and instantaneous stats instead of moving averages for Snd/Rcvbuffer sizes.
 SRT_API extern int srt_bistats(SRTSOCKET u, SRT_TRACEBSTATS * perf, int clear, int instantaneous);
 
-// Socket Status (for problem tracking)
+// Socket Status (for problem tracking) 可以获取到socket的状态
 SRT_API extern SRT_SOCKSTATUS srt_getsockstate(SRTSOCKET u);
 
 SRT_API extern int srt_epoll_create(void);

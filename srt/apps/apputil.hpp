@@ -148,7 +148,7 @@ inline sockaddr_in CreateAddrInet(const std::string& name, unsigned short port)
 
     return sa;
 }
-
+/*vector里每个string都后加字符串*/
 inline std::string Join(const std::vector<std::string>& in, std::string sep)
 {
     if ( in.empty() )

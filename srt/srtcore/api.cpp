@@ -933,7 +933,7 @@ int CUDTUnited::close(const SRTSOCKET u)
    {
        s->m_pUDT->close();
 
-       // synchronize with garbage collection.
+       // synchronize with garbage collection.  这里会有垃圾收集 TODO
        HLOGC(mglog.Debug, log << "%" << id << " CUDT::close done. GLOBAL CLOSE: " << s->m_pUDT->CONID() << ". Acquiring GLOBAL control lock");
        CGuard manager_cg(m_ControlLock);
 

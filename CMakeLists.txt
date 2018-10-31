@@ -1,0 +1,261 @@
+cmake_minimum_required(VERSION 3.10)
+project(testsrt)
+
+set(CMAKE_CXX_STANDARD 11)
+
+include_directories(CS60-DartNet/Common)
+include_directories(CS60-DartNet/IM/client)
+include_directories(CS60-DartNet/IM/common)
+include_directories(CS60-DartNet/IM/server)
+include_directories(CS60-DartNet/Network)
+include_directories(CS60-DartNet/Overlay)
+include_directories(CS60-DartNet/Topology)
+include_directories(DartNet/IM+SimpleStack/common)
+include_directories(DartNet/IM+SimpleStack/sip)
+include_directories(DartNet/IM+SimpleStack/son)
+include_directories(DartNet/IM+SimpleStack/stcp)
+include_directories(DartNet/IM+SimpleStack/topology)
+include_directories(DartNet/SIP/client)
+include_directories(DartNet/SIP/common)
+include_directories(DartNet/SIP/server)
+include_directories(DartNet/SIP/sip)
+include_directories(DartNet/SIP/son)
+include_directories(DartNet/SIP/topology)
+include_directories(DartNet/SON/common)
+include_directories(DartNet/SON/sip)
+include_directories(DartNet/SON/son)
+include_directories(DartNet/SON/topology)
+include_directories(DartNet/STCP/client)
+include_directories(DartNet/STCP/common)
+include_directories(DartNet/STCP/server)
+include_directories(DartNet/STCP_GBN/client)
+include_directories(DartNet/STCP_GBN/common)
+include_directories(DartNet/STCP_GBN/server)
+include_directories(srt/apps)
+include_directories(srt/common/win)
+include_directories(srt/common/win/ATTIC)
+include_directories(srt/haicrypt)
+include_directories(srt/srtcore)
+include_directories(srt/srtcore/ATTIC)
+include_directories(srt/testing)
+
+add_executable(testsrt
+        CS60-DartNet/Common/constants.h
+        CS60-DartNet/Common/pkt.c
+        CS60-DartNet/Common/pkt.h
+        CS60-DartNet/IM/client/app_client.c
+        CS60-DartNet/IM/client/srt_client.c
+        CS60-DartNet/IM/client/srt_client.h
+        CS60-DartNet/IM/common/constants.h
+        CS60-DartNet/IM/common/seg.c
+        CS60-DartNet/IM/common/seg.h
+        CS60-DartNet/IM/server/app_server.c
+        CS60-DartNet/IM/server/srt_server.c
+        CS60-DartNet/IM/server/srt_server.h
+        CS60-DartNet/Network/network.c
+        CS60-DartNet/Network/network.h
+        CS60-DartNet/Overlay/neighbortable.c
+        CS60-DartNet/Overlay/neighbortable.h
+        CS60-DartNet/Overlay/overlay.c
+        CS60-DartNet/Overlay/overlay.h
+        CS60-DartNet/References/File/Parse_read.cpp
+        CS60-DartNet/References/gram/memcpy.cpp
+        "CS60-DartNet/References/Pthread/locking mutexs.cpp"
+        CS60-DartNet/References/Pthread/main.c
+        CS60-DartNet/References/Pthread/pthread.cpp
+        CS60-DartNet/References/Sockect/client.cpp
+        CS60-DartNet/References/Sockect/Connectset.cpp
+        CS60-DartNet/References/Sockect/demo.c
+        CS60-DartNet/References/Sockect/server.cpp
+        CS60-DartNet/References/Sockect/Waitset.cpp
+        CS60-DartNet/Topology/topology.c
+        CS60-DartNet/Topology/topology.h
+        DartNet/IM+SimpleStack/client/app_simple_client.c
+        DartNet/IM+SimpleStack/client/app_stress_client.c
+        DartNet/IM+SimpleStack/client/IM_client.c
+        DartNet/IM+SimpleStack/common/constants.h
+        DartNet/IM+SimpleStack/common/head.h
+        DartNet/IM+SimpleStack/common/pkt.c
+        DartNet/IM+SimpleStack/common/pkt.h
+        DartNet/IM+SimpleStack/common/seg.c
+        DartNet/IM+SimpleStack/common/seg.h
+        DartNet/IM+SimpleStack/server/app_simple_server.c
+        DartNet/IM+SimpleStack/server/app_stress_server.c
+        DartNet/IM+SimpleStack/server/IM_server.c
+        DartNet/IM+SimpleStack/sip/dvtable.c
+        DartNet/IM+SimpleStack/sip/dvtable.h
+        DartNet/IM+SimpleStack/sip/nbrcosttable.c
+        DartNet/IM+SimpleStack/sip/nbrcosttable.h
+        DartNet/IM+SimpleStack/sip/routingtable.c
+        DartNet/IM+SimpleStack/sip/routingtable.h
+        DartNet/IM+SimpleStack/sip/sip.c
+        DartNet/IM+SimpleStack/sip/sip.h
+        DartNet/IM+SimpleStack/son/neighbortable.c
+        DartNet/IM+SimpleStack/son/neighbortable.h
+        DartNet/IM+SimpleStack/son/son.c
+        DartNet/IM+SimpleStack/son/son.h
+        DartNet/IM+SimpleStack/stcp/seghandler.c
+        DartNet/IM+SimpleStack/stcp/seghandler.h
+        DartNet/IM+SimpleStack/stcp/stcp_client.c
+        DartNet/IM+SimpleStack/stcp/stcp_client.h
+        DartNet/IM+SimpleStack/stcp/stcp_server.c
+        DartNet/IM+SimpleStack/stcp/stcp_server.h
+        DartNet/IM+SimpleStack/topology/topology.c
+        DartNet/IM+SimpleStack/topology/topology.h
+        DartNet/SIP/client/app_simple_client.c
+        DartNet/SIP/client/app_stress_client.c
+        DartNet/SIP/client/stcp_client.c
+        DartNet/SIP/client/stcp_client.h
+        DartNet/SIP/common/constants.h
+        DartNet/SIP/common/pkt.c
+        DartNet/SIP/common/pkt.h
+        DartNet/SIP/common/seg.c
+        DartNet/SIP/common/seg.h
+        DartNet/SIP/server/app_simple_server.c
+        DartNet/SIP/server/app_stress_server.c
+        DartNet/SIP/server/stcp_server.c
+        DartNet/SIP/server/stcp_server.h
+        DartNet/SIP/sip/dvtable.c
+        DartNet/SIP/sip/dvtable.h
+        DartNet/SIP/sip/nbrcosttable.c
+        DartNet/SIP/sip/nbrcosttable.h
+        DartNet/SIP/sip/routingtable.c
+        DartNet/SIP/sip/routingtable.h
+        DartNet/SIP/sip/sip.c
+        DartNet/SIP/sip/sip.h
+        DartNet/SIP/son/neighbortable.c
+        DartNet/SIP/son/neighbortable.h
+        DartNet/SIP/son/son.c
+        DartNet/SIP/son/son.h
+        DartNet/SIP/topology/topology.c
+        DartNet/SIP/topology/topology.h
+        DartNet/SON/common/constants.h
+        DartNet/SON/common/pkt.c
+        DartNet/SON/common/pkt.h
+        DartNet/SON/sip/sip.c
+        DartNet/SON/sip/sip.h
+        DartNet/SON/son/neighbortable.c
+        DartNet/SON/son/neighbortable.h
+        DartNet/SON/son/son.c
+        DartNet/SON/son/son.h
+        DartNet/SON/topology/topology.c
+        DartNet/SON/topology/topology.h
+        DartNet/STCP/client/app_client.c
+        DartNet/STCP/client/stcp_client.c
+        DartNet/STCP/client/stcp_client.h
+        DartNet/STCP/common/constants.h
+        DartNet/STCP/common/seg.c
+        DartNet/STCP/common/seg.h
+        DartNet/STCP/server/app_server.c
+        DartNet/STCP/server/stcp_server.c
+        DartNet/STCP/server/stcp_server.h
+        DartNet/STCP_GBN/client/app_simple_client.c
+        DartNet/STCP_GBN/client/app_stress_client.c
+        DartNet/STCP_GBN/client/stcp_client.c
+        DartNet/STCP_GBN/client/stcp_client.h
+        DartNet/STCP_GBN/common/constants.h
+        DartNet/STCP_GBN/common/seg.c
+        DartNet/STCP_GBN/common/seg.h
+        DartNet/STCP_GBN/server/app_simple_server.c
+        DartNet/STCP_GBN/server/app_stress_server.c
+        DartNet/STCP_GBN/server/stcp_server.c
+        DartNet/STCP_GBN/server/stcp_server.h
+        srt/apps/apputil.hpp
+        srt/apps/logsupport.cpp
+        srt/apps/logsupport.hpp
+        srt/apps/socketoptions.cpp
+        srt/apps/socketoptions.hpp
+        srt/apps/srt-file-transmit.cpp
+        srt/apps/srt-live-transmit.cpp
+        srt/apps/srt-multiplex.cpp
+        srt/apps/transmitbase.hpp
+        srt/apps/transmitmedia.cpp
+        srt/apps/transmitmedia.hpp
+        srt/apps/uriparser.cpp
+        srt/apps/uriparser.hpp
+        srt/apps/verbose.cpp
+        srt/apps/verbose.hpp
+        srt/common/win/ATTIC/winporting.h
+        srt/common/win/inttypes.h
+        srt/common/win/stdint.h
+        srt/common/win/syslog_defs.h
+        srt/common/win/unistd.h
+        srt/common/win/wintime.h
+        srt/common/win_time.cpp
+        srt/examples/recvfile.cpp
+        srt/examples/sendfile.cpp
+        srt/examples/suflip.cpp
+        srt/examples/testcapi-connect.c
+        srt/haicrypt/haicrypt.h
+        srt/haicrypt/haicrypt_log.cpp
+        srt/haicrypt/haicrypt_log.h
+        srt/haicrypt/hc_nettle_aes.c
+        srt/haicrypt/hc_openssl_aes.c
+        srt/haicrypt/hc_openssl_evp_cbc.c
+        srt/haicrypt/hc_openssl_evp_ctr.c
+        srt/haicrypt/hcrypt-gnutls.c
+        srt/haicrypt/hcrypt-gnutls.h
+        srt/haicrypt/hcrypt-openssl.h
+        srt/haicrypt/hcrypt.c
+        srt/haicrypt/hcrypt.h
+        srt/haicrypt/hcrypt_ctx.h
+        srt/haicrypt/hcrypt_ctx_rx.c
+        srt/haicrypt/hcrypt_ctx_tx.c
+        srt/haicrypt/hcrypt_msg.h
+        srt/haicrypt/hcrypt_rx.c
+        srt/haicrypt/hcrypt_sa.c
+        srt/haicrypt/hcrypt_tx.c
+        srt/haicrypt/hcrypt_ut.c
+        srt/haicrypt/hcrypt_xpt_srt.c
+        srt/haicrypt/hcrypt_xpt_sta.c
+        srt/srtcore/ATTIC/ccc.cpp
+        srt/srtcore/ATTIC/ccc.h
+        srt/srtcore/api.cpp
+        srt/srtcore/api.h
+        srt/srtcore/buffer.cpp
+        srt/srtcore/buffer.h
+        srt/srtcore/cache.cpp
+        srt/srtcore/cache.h
+        srt/srtcore/channel.cpp
+        srt/srtcore/channel.h
+        srt/srtcore/common.cpp
+        srt/srtcore/common.h
+        srt/srtcore/core.cpp
+        srt/srtcore/core.h
+        srt/srtcore/crypto.cpp
+        srt/srtcore/crypto.h
+        srt/srtcore/epoll.cpp
+        srt/srtcore/epoll.h
+        srt/srtcore/handshake.cpp
+        srt/srtcore/handshake.h
+        srt/srtcore/list.cpp
+        srt/srtcore/list.h
+        srt/srtcore/logging.h
+        srt/srtcore/logging_api.h
+        srt/srtcore/md5.cpp
+        srt/srtcore/md5.h
+        srt/srtcore/netinet_any.h
+        srt/srtcore/packet.cpp
+        srt/srtcore/packet.h
+        srt/srtcore/platform_sys.h
+        srt/srtcore/queue.cpp
+        srt/srtcore/queue.h
+        srt/srtcore/smoother.cpp
+        srt/srtcore/smoother.h
+        srt/srtcore/srt.h
+        srt/srtcore/srt4udt.h
+        srt/srtcore/srt_c_api.cpp
+        srt/srtcore/srt_compat.c
+        srt/srtcore/srt_compat.h
+        srt/srtcore/threadname.h
+        srt/srtcore/udt.h
+        srt/srtcore/utilities.h
+        srt/srtcore/window.cpp
+        srt/srtcore/window.h
+        srt/testing/srt-test-file.cpp
+        srt/testing/srt-test-live.cpp
+        srt/testing/srt-test-relay.cpp
+        srt/testing/testmedia.cpp
+        srt/testing/testmedia.hpp
+        srt/testing/testmediabase.hpp
+        srt/testing/utility-test.cpp)
